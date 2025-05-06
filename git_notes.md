@@ -336,7 +336,7 @@ git checkout -- file1
 
 ## 远程仓库
 
-将本地的内容推送到远程origin仓库（使用`git remote`命令查看所有远程仓库）中，推送的本地分支名是main（前），远程分支名也是main
+将本地的内容推送到远程origin仓库（使用`git remote`命令查看所有远程仓库）中，推送的**本地分支名**是main**（前）**，远程分支名也是main
 
 ```bash
 git push origin main:main
@@ -390,3 +390,38 @@ git pull origin 远程分支名>
 ```
 
 而直接使用`git pull`，此命令表示当本地分支与上游分支同名时，**对当前分支执行pull操作，对其他分支执行fetch操作**，具体的差异主要取决于对应的远程分支有没有更新。
+
+
+
+## 实际开发汇总
+
+1、同步远程最近代码 
+
+```bash
+git fetch origin        # 获取远程分支最新状态（不自动合并）
+git pull origin main   # 拉取远程main分支并合并到本地（相当于 fetch + merge）
+```
+
+先 `fetch` 查看变更，再决定是否 `pull`，避免直接 `pull` 导致冲突
+
+2、创建新分支
+
+```bash
+git checkout -b [branch name]
+```
+
+3、本地开发+提交到本地仓库
+
+```bash
+git status       # 查看文件状态
+git diff         # 查看具体修改内容
+git add .                  # 添加所有修改（或指定文件路径）
+git commit -m "描述信息"    # 提交到本地仓库
+```
+
+4、推送分支到远程
+
+```bash
+git push origin xxx  # 首次推送需加 `-u` 参数关联远程分支
+```
+
